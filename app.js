@@ -119,7 +119,11 @@ app.post("/delete", function(req, res) {
     });
     res.redirect("/");
   }else{
-
+    List.findOneAndUpdate({name: listName}, {$pull: {items: {_id: itemId}}}, function(err, fountList){
+      if(!err){
+        res.redirect("/" + listName);
+      }
+    });
   }
 
 
